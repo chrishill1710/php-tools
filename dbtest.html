@@ -1,0 +1,21 @@
+<html>
+<body>
+<?php
+include 'conn.php';
+try {
+$db = new PDO("informix:host=$ids_host; service=$ids_service;
+database=sysadmin; server=$ids_server; protocol=onsoctcp;
+EnableScrollableCursors=1;", "$ids_user", "$ids_pass");
+print "Hello World!</br></br>";
+print "Connection Established!</br></br>";
+$stmt = $db->query("select * from systables");
+$res = $stmt->fetch( PDO::FETCH_BOTH );
+$rows = $res[0];
+echo "Table contents: $rows.</br>";
+} catch (PDOException $e) {
+    print $e->getMessage();
+}
+
+?>
+</body>
+</html>
